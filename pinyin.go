@@ -141,6 +141,15 @@ func toFixed(p string, a Args) string {
 	}
 	return py
 }
+//带声调的转换成不带声调的
+func ToN(p string) string {
+	py := rePhoneticSymbol.ReplaceAllStringFunc(p, func(m string) string {
+		symbol, _ := phoneticSymbol[m]
+		m = reTone2.ReplaceAllString(symbol, "$1")
+		return m
+	})
+	return py
+}
 
 func applyStyle(p []string, a Args) []string {
 	newP := []string{}
